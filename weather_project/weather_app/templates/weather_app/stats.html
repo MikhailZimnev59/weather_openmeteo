@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Статистика</title>
+    <link rel="stylesheet" href="{% static 'weather_forecast/css/style.css' %}">
+
+</head>
+<body>
+  <h1>Статистика поисков</h1>
+  <ol class="list-group">
+    {% for city in stats %}
+      <li class="list-group-item">
+        {{ city.city_name|upper }} : {{ city.search_count }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">Нет данных</li>
+    {% endfor %}
+  </ol>
+  <a href="{% url 'index' %}">← На главную</a>
+</body>
+</html>

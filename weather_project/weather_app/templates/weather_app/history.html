@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>История</title>
+    <link rel="stylesheet" href="{% static 'weather_forecast/css/style.css' %}">
+</head>
+<body>
+  <h1>История запросов</h1>
+  <ol class="list-group">
+    {% for req in hist %}
+      <li class="list-group-item">
+        {{ req.searched_at }} : {{ req.city_name|upper }}
+      </li>
+    {% empty %}
+      <li class="list-group-item">Нет данных</li>
+    {% endfor %}
+  </ol>
+  <a href="{% url 'index' %}">← На главную</a>
+</body>
+</html>
