@@ -8,6 +8,7 @@
 
 </head>
 <body>
+  <a href="{% url 'index' %}">← На главную</a>
   <h1>Статистика поисков</h1>
   <ol class="list-group">
     {% for city in stats %}
@@ -18,6 +19,6 @@
       <li class="list-group-item">Нет данных</li>
     {% endfor %}
   </ol>
-  <a href="{% url 'index' %}">← На главную</a>
+
 </body>
 </html>

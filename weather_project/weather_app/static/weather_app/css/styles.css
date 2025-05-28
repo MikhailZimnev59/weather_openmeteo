@@ -3,7 +3,8 @@ body {
     background-color: #f4f4f4;
     color: #333;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+
 }
 
 header {
@@ -29,7 +30,7 @@ button {
 button:hover {
     background-color: #218838;
 }
-p {
-    color: red;
-    backgroudn-color: #111111;
+h1
+{
+    color: black;
 }

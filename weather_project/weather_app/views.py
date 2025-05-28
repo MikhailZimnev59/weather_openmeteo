@@ -99,7 +99,7 @@ def stats(request):
     return render(request, 'weather_app/stats.html', context)
 
 def history(request):
-    hist = UserSearchHistory.objects.all().order_by('-searched_at')[:40]
+    hist = UserSearchHistory.objects.all().order_by('-searched_at')
 
     context = {
         'hist': hist,
