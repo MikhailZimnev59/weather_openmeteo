@@ -106,3 +106,8 @@ def history(request):
     }
     return render(request, 'weather_app/history.html', context)
 
+def stats_api(request):
+    stats = CitySearch.objects.all()
+    data = {c.city_name: c.search_count for c in stats}
+    return JsonResponse(data)
+
