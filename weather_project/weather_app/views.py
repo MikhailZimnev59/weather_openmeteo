@@ -5,12 +5,16 @@ from .models import CitySearch, UserSearchHistory
 
 NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search'
 OPEN_METEO_URL = 'https://api.open-meteo.com/v1/forecast'
+
+#Расшифровка кодов погоды, если в словаре нет, то выводится "Код не найден"
+
 WC = {0: 'Ясное небо',                      1: 'В основном ясно', 2: 'Переменная облачность', 3: 'Пасмурно',    45: 'Туман',
       48: 'Иней или иней на земле',         51: 'Лёгкая морось',53: 'Умеренная морось', 55: 'Сильная морось',   56: 'Морось + замерзающая (лёгкая)',
       57: 'Морось + замерзающая (сильная)', 61: 'Лёгкий дождь', 63: 'Умеренный дождь',  65: 'Сильный дождь',    66: 'Дождь + замерзающий (лёгкий)',
       67: 'Дождь + замерзающий (сильный)',  71: 'Лёгкий снег',  73: 'Умеренный снег',   75: 'Сильный снег',     77: 'Град',
       80: 'Ливень — лёгкий',                81: 'Ливень — умеренный',                   82: 'Ливень — сильный', 85: 'Ливень со снегом — лёгкий',
       86: 'Ливень со снегом — сильный',     95: 'Гроза (обычная или слабая)',           96: 'Гроза + лёгкий град', 99: 'Гроза + сильный град'}
+
 def get_lat_lon(city_name):
     # Геокодирование города через Nominatim
     params = {
@@ -91,6 +95,8 @@ def index(request):
 from django.http import JsonResponse
 
 def stats(request):
+    ''' Статистика вызовов по городам, сортировка по убыванию количества вызовов'''
+
     stats = CitySearch.objects.all().order_by('-search_count')
 
     context = {
@@ -99,6 +105,8 @@ def stats(request):
     return render(request, 'weather_app/stats.html', context)
 
 def history(request):
+    ''' История вызовов, сортировка по убыванию времени вызова '''
+
     hist = UserSearchHistory.objects.all().order_by('-searched_at')
 
     context = {
@@ -107,6 +115,7 @@ def history(request):
     return render(request, 'weather_app/history.html', context)
 
 def stats_api(request):
+    '''Статисика вызовов по городам (API)'''
     stats = CitySearch.objects.all()
     data = {c.city_name: c.search_count for c in stats}
     return JsonResponse(data)
