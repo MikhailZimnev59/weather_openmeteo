@@ -27,7 +27,24 @@ def get_lat_lon(city_name):
         return None, None
     data = r.json()[0]
     return float(data['lat']), float(data['lon'])
+import requests
 
+def get_lat_lon_geocoding(city):
+    # Геокодирование города через geocoding
+    url = "https://geocoding-api.open-meteo.com/v1/search "
+    params = {
+        'name': city,
+        'count': 1,
+        'language': 'en',
+        'format': 'json'
+    }
+    response = requests.get(url, params=params)
+    data = response.json()
+    if data['results']:
+        result = data['results'][0]
+        return result['latitude'], result['longitude']
+    else:
+        raise Exception(f"City {city} not found")
 def get_weather(lat, lon):
     # Получить погоду на ближайшее время (например, температуру, погода, время)
     params = {
