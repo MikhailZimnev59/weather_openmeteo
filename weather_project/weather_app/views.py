@@ -1,4 +1,4 @@
-'''Views для приложения weather_app'''
+'''Views для приложения weather_app прогноз погоды'''
 import requests
 from django.shortcuts import render, redirect
 from .models import CitySearch, UserSearchHistory

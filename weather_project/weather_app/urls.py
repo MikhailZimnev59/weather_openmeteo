@@ -1,4 +1,4 @@
-'''Маршруты приложения weather_app'''
+'''Маршруты приложения weather_app прогноз погоды'''
 from django.urls import path
 from . import views
 
